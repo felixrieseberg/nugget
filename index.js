@@ -107,7 +107,7 @@ module.exports = function (urls, opts, cb) {
     })
     if (rendered < downloads.length) output += '\n... and ' + (downloads.length - rendered) + ' more\n'
     if (downloads.length > 1) output += '\nCombined Speed: ' + prettyBytes(totalSpeed) + '/s\n'
-    if (opts.prefix) output = output.split('\n').map((l) => opts.prefix + l).join('')
+    if (opts.prefix) output = output.split('\n').map((l) => opts.prefix + l).join('\n')
     _log(output)
   }
 

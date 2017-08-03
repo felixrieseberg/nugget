@@ -38,10 +38,11 @@ module.exports = function (urls, opts, cb) {
   var pending = 0
   var truncated = urls.length * 2 >= (process.stdout.rows - 15)
 
-  urls.forEach(function (url) {
+  urls.forEach(function (url, index) {
     debug('start dl', url)
     pending++
-    var dl = startDownload(url, opts, function done (err) {
+    var outputName = opts && opts.targetNames ? opts.targetNames[i] : undefined
+    var dl = startDownload(url, opts, outputName, function done (err) {
       debug('done dl', url, pending)
       if (err) {
         debug('error dl', url, err)
@@ -111,8 +112,8 @@ module.exports = function (urls, opts, cb) {
     _log(output)
   }
 
-  function startDownload (url, opts, cb) {
-    var targetName = path.basename(url).split('?')[0]
+  function startDownload (url, opts, outputName, cb) {
+    var targetName = outputName || path.basename(url).split('?')[0]
     if (opts.singleTarget && opts.target) targetName = opts.target
     var target = path.resolve(opts.dir || process.cwd(), targetName)
     if (opts.resume) {

@@ -41,7 +41,7 @@ module.exports = function (urls, opts, cb) {
   urls.forEach(function (url, index) {
     debug('start dl', url)
     pending++
-    var outputName = opts && opts.targetNames ? opts.targetNames[i] : undefined
+    var outputName = opts && opts.targetNames ? opts.targetNames[index] : undefined
     var dl = startDownload(url, opts, outputName, function done (err) {
       debug('done dl', url, pending)
       if (err) {
